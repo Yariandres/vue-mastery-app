@@ -3,5 +3,7 @@ import PageHome from './components/PageHome.vue';
 </script>
 
 <template>
-  <page-home />
+  <div class="container">
+    <router-view />
+  </div>
 </template>
