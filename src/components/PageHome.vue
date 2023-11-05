@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import ThreadList from './ThreadList.vue';
 import sourceData from '../data.json';
 
 const threads = ref(sourceData.threads);
@@ -13,12 +14,12 @@ function postById(postId: string) {
 function userById(userId: string) {
   return users.value.find((u) => u.id === userId);
 }
-
-console.log(sourceData);
 </script>
 
 <template>
-  <div v-for="thread in threads" :key="thread.id" class="col-large push-top">
+  <h1>Welcome to forum</h1>
+  <thread-list />
+  <!-- <div v-for="thread in threads" :key="thread.id" class="col-large push-top">
     <h1>{{ thread.title }}</h1>
 
     <div class="post" v-for="postId in thread.posts" :key="postId">
@@ -42,5 +43,5 @@ console.log(sourceData);
         {{ postById(postId)?.publishedAt }}
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
