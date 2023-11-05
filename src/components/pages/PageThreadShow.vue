@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import sourceData from '../data.json';
+import sourceData from '../../data.json';
 
 const props = defineProps<{
   id: string;
 }>();
-console.log(props.id);
 
 const threads = ref(sourceData.threads);
 const posts = ref(sourceData.posts);
@@ -19,15 +18,13 @@ function postById(postId: string) {
   return posts.value.find((p) => p.id === postId);
 }
 
-console.log(thread.value);
-
 function userById(userId: string) {
   return users.value.find((u) => u.id === userId);
 }
 </script>
 
 <template>
-  <div class="col-large push-top">
+  <div v-if="thread" class="col-large push-top">
     <h1>{{ thread.title }}</h1>
 
     <div class="post" v-for="postId in thread.posts" :key="postId">
@@ -50,6 +47,14 @@ function userById(userId: string) {
       <div class="post-datae text-faded">
         {{ postById(postId)?.publishedAt }}
       </div>
+    </div>
+  </div>
+  <div v-else>
+    <div class="col-full text-center">
+      <h1>This Thread does not exist</h1>
+      <router-link :to="{ name: 'Home' }">
+        &#8592; Back to some cool threads</router-link
+      >
     </div>
   </div>
 </template>
