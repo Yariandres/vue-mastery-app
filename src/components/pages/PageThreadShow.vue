@@ -21,11 +21,17 @@ function postById(postId: string) {
 function userById(userId: string) {
   return users.value.find((u) => u.id === userId);
 }
+
+const threadPosts = computed(() => {
+  return posts.find((post: any) => post.threadId === props.id);
+});
 </script>
 
 <template>
   <div v-if="thread" class="col-large push-top">
     <h1>{{ thread.title }}</h1>
+
+    <!-- <post-list :thread.id="threadPosts" /> -->
 
     <div class="post" v-for="postId in thread.posts" :key="postId">
       <div class="user-info">
