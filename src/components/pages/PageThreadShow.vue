@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import PostList from '../PostList.vue';
 import sourceData from '../../data.json';
 
 const props = defineProps<{
@@ -8,22 +9,13 @@ const props = defineProps<{
 
 const threads = ref(sourceData.threads);
 const posts = ref(sourceData.posts);
-const users = ref(sourceData.users);
 
 const thread = computed(() => {
   return threads.value.find((thread: any) => thread.id === props.id);
 });
 
-function postById(postId: string) {
-  return posts.value.find((p) => p.id === postId);
-}
-
-function userById(userId: string) {
-  return users.value.find((u) => u.id === userId);
-}
-
 const threadPosts = computed(() => {
-  return posts.find((post: any) => post.threadId === props.id);
+  return posts.value.filter((post: any) => post.threadId === props.id);
 });
 </script>
 
@@ -31,29 +23,7 @@ const threadPosts = computed(() => {
   <div v-if="thread" class="col-large push-top">
     <h1>{{ thread.title }}</h1>
 
-    <!-- <post-list :thread.id="threadPosts" /> -->
-
-    <div class="post" v-for="postId in thread.posts" :key="postId">
-      <div class="user-info">
-        <a href="#" class="user-name">
-          {{ userById(postById(postId)?.userId)?.name }}
-        </a>
-
-        <a href="#" class="avatar-large"
-          ><img :src="userById(postById(postId)?.userId)?.avatar" alt="" />
-        </a>
-
-        <p class="desktop-only text-small">107 posts</p>
-      </div>
-
-      <div class="post-content">
-        <p>{{ postById(postId)?.text }}</p>
-      </div>
-
-      <div class="post-datae text-faded">
-        {{ postById(postId)?.publishedAt }}
-      </div>
-    </div>
+    <post-list :posts="threadPosts" />
   </div>
   <div v-else>
     <div class="col-full text-center">

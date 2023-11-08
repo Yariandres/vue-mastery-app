@@ -1,4 +1,3 @@
-<script setup lang="ts"></script>
 <template>
   <div class="col-full text-center">
     <h1>NOT FOUND ERROR 404</h1>
