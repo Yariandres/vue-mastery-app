@@ -6,7 +6,6 @@ defineProps<{
   posts: Array<any>;
 }>();
 
-const posts = ref(sourceData.posts);
 const users = ref(sourceData.users);
 
 function userById(userId: string) {

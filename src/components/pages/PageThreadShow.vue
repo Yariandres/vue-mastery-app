@@ -9,6 +9,7 @@ const props = defineProps<{
 
 const threads = ref(sourceData.threads);
 const posts = ref(sourceData.posts);
+const newPostText = ref();
 
 const thread = computed(() => {
   return threads.value.find((thread: any) => thread.id === props.id);
@@ -24,6 +25,25 @@ const threadPosts = computed(() => {
     <h1>{{ thread.title }}</h1>
 
     <post-list :posts="threadPosts" />
+
+    <div class="col-full">
+      <form>
+        <div class="from-group">
+          <textarea
+            v-model="newPostText"
+            @input="newPostText = ($event.target as HTMLTextAreaElement).value"
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+          ></textarea>
+        </div>
+
+        <div class="form-action">
+          <button type="button"></button>
+        </div>
+      </form>
+    </div>
   </div>
   <div v-else>
     <div class="col-full text-center">
