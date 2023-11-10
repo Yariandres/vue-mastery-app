@@ -5,7 +5,6 @@ import sourceData from '../../data.json';
 
 const threads = ref(sourceData.threads);
 const users = ref(sourceData.users);
-const newPostText = ref();
 
 function userById(userId: string) {
   return users.value.find((u) => u.id === userId);

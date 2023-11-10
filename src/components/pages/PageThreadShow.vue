@@ -18,6 +18,23 @@ const thread = computed(() => {
 const threadPosts = computed(() => {
   return posts.value.filter((post: any) => post.threadId === props.id);
 });
+
+const addPost = () => {
+  const postId = Math.random().toString(36).substr(2, 9);
+  const post = {
+    text: newPostText.value,
+    publishedAt: Math.floor(Date.now() / 1000),
+    id: postId,
+    userId: 'rpbB8C6ifrYmNDufMERWfQUoa202',
+    threadId: props.id,
+  };
+
+  posts.value.push(post);
+  thread.value?.posts.push(postId + 'Yoooo ammam');
+  newPostText.value = '';
+};
+
+//      @input="newPostText = ($event.target as HTMLTextAreaElement).value"
 </script>
 
 <template>
@@ -27,20 +44,20 @@ const threadPosts = computed(() => {
     <post-list :posts="threadPosts" />
 
     <div class="col-full">
-      <form>
+      <form @submit.prevent="addPost">
         <div class="from-group">
           <textarea
             v-model="newPostText"
-            @input="newPostText = ($event.target as HTMLTextAreaElement).value"
             name=""
             id=""
             cols="30"
             rows="10"
+            class="form-input"
           ></textarea>
         </div>
 
-        <div class="form-action">
-          <button type="button"></button>
+        <div class="form-actions">
+          <button class="btn-blue" type="submit">Submit Post</button>
         </div>
       </form>
     </div>
