@@ -26,11 +26,7 @@ defineProps<{
         <div class="activity">
           <p class="replies-count">{{ thread.posts.length }} Replies</p>
 
-          <img
-            class="avatar-medium"
-            :src="userById(thread.userId).avatar"
-            alt=""
-          />
+          <img class="avatar-medium" :src="userById(thread.userId).avatar" />
 
           <div>
             <p class="text-xsmall">
