@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import sourceData from '../data.json';
+import daysjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+daysjs.extend(relativeTime);
 
 defineProps<{
   posts: Array<any>;
@@ -10,6 +13,14 @@ const users = ref(sourceData.users);
 
 function userById(userId: string) {
   return users.value.find((u) => u.id === userId);
+}
+
+function diffForHummans(timestamp: number) {
+  return daysjs.unix(timestamp).fromNow();
+}
+
+function homanFriendlyDate(timestamp: number) {
+  return daysjs.unix(timestamp).format('MMMM DD, YYYY [at] hh:mm A');
 }
 </script>
 
@@ -32,8 +43,11 @@ function userById(userId: string) {
         <p>{{ post.text }}</p>
       </div>
 
-      <div class="post-date text-faded">
-        {{ post.publishedAt }}
+      <div
+        class="post-date text-faded"
+        :title="homanFriendlyDate(post.publishedAt)"
+      >
+        {{ diffForHummans(post.publishedAt) }}
       </div>
     </div>
   </div>
