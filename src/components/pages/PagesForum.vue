@@ -26,6 +26,6 @@ const treads = computed(() => {
   </div>
 
   <div class="col-full push-top">
-    <ThreadList :threads="treads" />
+    <thread-list :threads="treads" />
   </div>
 </template>
