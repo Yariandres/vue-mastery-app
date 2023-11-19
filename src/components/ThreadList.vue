@@ -1,9 +1,18 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
+import sourceData from '../data.json';
 import AddpDate from './AppDate.vue';
+
 defineProps<{
   threads: any;
-  userById: any;
 }>();
+
+const users = ref(sourceData.users);
+
+function userById(userId: string) {
+  return users.value.find((u) => u.id === userId);
+}
 </script>
 <template>
   <div class="col-full">

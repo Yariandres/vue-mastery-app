@@ -2,11 +2,19 @@ import { createRouter, createWebHistory } from 'vue-router';
 import PageHome from '../components/pages/PageHome.vue';
 import PageThreadShow from '../components/pages/PageThreadShow.vue';
 import PageNotFound from '../components/pages/PageNotFound.vue';
+import PagesForum from '../components/pages/PagesForum.vue';
 
 import sourceData from '../data.json';
 
 const routes = [
   { path: '/', name: 'Home', component: PageHome },
+  {
+    path: '/forum/:id',
+    name: 'Forum',
+    component: PagesForum,
+    props: true,
+  },
+
   {
     path: '/thread/:id',
     name: 'ThreadShow',
