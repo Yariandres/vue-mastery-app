@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AddpDate from './AppDate.vue';
 defineProps<{
   threads: any;
   userById: any;
@@ -18,8 +19,9 @@ defineProps<{
           </p>
 
           <p class="text-faded text-xsmall">
-            By <a href="#">{{ userById(thread.userId).name }}</a>
-            {{ thread.publishedAt }}
+            By <a href="#">{{ userById(thread.userId).name }}</a
+            >,
+            <AddpDate :timestamp="thread.publishedAt" />
           </p>
         </div>
 
@@ -32,8 +34,7 @@ defineProps<{
             <p class="text-xsmall">
               <a href="#">{{ userById(thread.userId).name }}</a>
             </p>
-
-            <p class="text-xsmall">{{ thread.publishedAt }}</p>
+            <AddpDate :timestamp="thread.publishedAt" class="text-xsmall" />
           </div>
         </div>
       </div>
